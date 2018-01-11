@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NC State Shibboleth Login</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.ncsu.edu/brand-assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/idp/css/style_301.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="icon" type="image/x-icon" href="https://www.ncsu.edu/favicon.ico">
+  </head>
+  <body>
+    <a class="sr-only" href="#content">Skip to main content</a>
+
+    <div class="bs-header">
+      <div class="container heading-content">
+       <header role="banner">
+        <div class="row">
+          <div class="col-md-12">
+            <img class="logo-image" src="https://cdn.ncsu.edu/brand-assets/logos/ncstate-brick-2x1.jpg" alt="NC State Shibboleth Login">
+            <h1 class="shib-title">Shibboleth Login Service</h1>
+          </div>
+        </div>
+       </header>
+      </div>
+    </div>
+
+    <div class="container main-content" id="content">
+      <div class="row">
+        <main role="main">
+          <div class="col-sm-5 main-side">
+            <h1 class="sr-only">NC State Shibboleth Login</h1>
+    
+                        
+
+            <div class="shib-form" role="form" aria-label="login form">
+
+              <form name="loginform" action="/idp/profile/SAML2/Redirect/SSO?execution=e1s1" 
+                    method="post" class="form-signin" role="form">
+
+                                  <h2 class="shib-heading">Enter your Unity ID 
+                    and Password</h2>
+
+                  <label for="username">Unity ID <span class="required-red">*</span></label>
+                  <input class="form-control" 
+                    id="username" name="j_username" type="text" 
+                    value=""
+                    required="">
+
+                  <label for="password">Password <span class="required-red">*</span></label>
+                  <input class="form-control" 
+                    id="password" name="j_password" type="password" 
+                    value="" required="">
+
+                                                                                        
+                                                                
+                                  <button id="formSubmit" class="btn btn-red" 
+                    type="submit" name="_eventId_proceed"
+                    onClick="this.childNodes[0].nodeValue='Logging in, please wait...'"
+                    >LOG IN <span class="glyphicon glyphicon-thin-arrow" aria-hidden="true"></span></button>
+                
+                              </form>
+            </div>
+
+            <h2 class="shib-heading">Need Help?</h2>
+            <ul>
+              <li>
+                Forgot your <a href="https://oit.ncsu.edu/my-it/unity-credentials/">Unity ID or Password?</a>
+              </li>
+              <!-- For OIM Later...
+              <li>
+                Need to <a href="#">Reset your password?</a>
+              </li>
+              -->
+              <li>
+                For help with password resets or login issues, contact the
+                NC State Help Desk at 919-515-HELP (4357) or
+                <a href="mailto:help@ncsu.edu">help@ncsu.edu</a>.
+              </li>
+            </ul>
+
+          </div>
+        </main>
+        <aside role="complementary">
+          <div class="col-sm-7">
+
+                                                
+		
+            
+                       <div class="panel panel-blue">
+             <div class="panel-heading">
+               <strong>ENROLL IN DUO</strong>
+             </div>
+             <div class="panel-body">
+               Protect your data assets against unauthorized access
+               (e.g. phishing) by enrolling in Duo Two-Factor
+               Authentication. This secure two-step login process is
+               for web applications that use Shibboleth authentication.
+               All university employees are required to enroll in Duo
+               by Oct. 31, 2017. Visit 
+               <a href="https://go.ncsu.edu/2fa">Two-Factor
+               Authentication at NC State</a> to enroll and for
+               additional information. 
+             </div>
+           </div>
+
+           <h2 class="shib-heading">What is Shibboleth?</h2>
+           <p>
+             The Shibboleth System is a standards based, open source
+             software package for web single sign-on across or within
+             organizational boundaries. More information can be found on
+             our 
+             <a href="https://oit.ncsu.edu/campus-it/identity-management/shibboleth/" target="oit">Shibboleth at NC State page</a>.
+           </p>
+
+           <h2 class="shib-heading">Do Not Bookmark This Page</h2>
+           <p>
+             Shibboleth works by authenticating your Unity ID and
+             password, and then redirecting you back to the service you
+             came from. If you bookmark this page, Shibboleth won't know
+             which service to send you back to, and will display an
+             error.
+           </p>
+
+           <h2 class="shib-heading">Keep Your Account Secure</h2>
+           <p>
+             To protect your privacy, <b>completely exit your web browser</b>
+             when finished.
+           </p>
+           <p>
+             Remember that NC State personnel will NEVER ask you to
+             reveal personal information, such as passwords or other
+             restricted data, by email, phone, text, or other means of
+             communication. If you receive such a message or have replied
+             to one, please report it to
+             <a href="mailto:help@ncsu.edu">help@ncsu.edu</a>.
+           </p>
+
+
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="container" role="contentinfo">
+      <div class="group page-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="shib-footer">
+              <a href="https://oit.ncsu.edu/campus-it/identity-management/shibboleth/">Shibboleth</a> service is provided by the <a href="https://oit.ncsu.edu/">Office of Information Technology</a> at <a href="https://www.ncsu.edu/">NC State University</a>.            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below) -->
+    <script src="https://cdn.ncsu.edu/brand-assets/bootstrap/js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

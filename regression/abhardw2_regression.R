@@ -1,0 +1,177 @@
+
+# Project 2:
+# UNITY ID: abhardw2
+# Name: Aditya Bhardwaj
+
+library('corrplot')
+library(MASS) 
+
+# Please set the working directory for the file below:
+setwd("/Users/ADITYA/data/NCState/iot/project/regression/")
+
+prob <- read.csv('BHARDWAJ ADITYA.csv', header = TRUE)
+
+
+chi.fun <- function(value1, value2){
+  tbl = table(value1, value2) 
+  print(chisq.test(tbl))
+}
+
+chi.fun(prob$X1, prob$Y)
+
+# Part 1
+# The function below calculates and prints the basic statistical analysis of data for the dataset
+basicStats.fun <- function(metrics, header){
+  hist(metrics, main = paste("Histogram for", header, sep=" "))
+  plot(metrics, main = paste("Scatter Plot for", header, sep=" "))
+  dframe <- data.frame(X1 = metrics)
+  bx <- boxplot(dframe, outline = FALSE, main = paste("Box Plot for", header, sep=" "))
+  
+  # Removing Outliers in this function
+  x2 <- metrics[!(metrics %in% bx$out)]
+  
+  m.m <- mean(metrics)
+  print(paste(paste("Mean of", header, sep=" "), m.m, sep = ":"))
+  v.m <- var(metrics)
+  print(paste(paste("Variance of", header, sep=" "), v.m, sep = ":"))
+  metrics <- x2
+}
+
+
+basicStats.fun(prob$X1, 'X1')
+basicStats.fun(prob$X2, 'X2')
+basicStats.fun(prob$X3, 'X3')
+basicStats.fun(prob$X4, 'X4')
+basicStats.fun(prob$X5, 'X5')
+
+# Function to show complete clean box plot to the user
+boxplot.fun <- function(dataset) {
+  d <- data.frame(X1 = dataset[1], X2 = dataset[2], X3 = dataset[3], X4 = dataset[4], X5 = dataset[5], Y = dataset[6])
+  boxplot(d, outline=FALSE)
+}
+
+boxplot.fun(prob)
+
+# The function below calculates and plots the correlation matrix of the elements in the dataset.
+correlation.fun <- function(dataset){
+  d <- data.frame(X1 = dataset[1], X2 = dataset[2], X3 = dataset[3], X4 = dataset[4], X5 = dataset[5], Y = dataset[6])
+  correlationD <- cor(d)
+  corrplot(correlationD, method = "circle")
+}
+
+correlation.fun(prob)
+
+# Part 2
+linear.fun <- function(dataset){
+  lr.mod = lm(dataset$Y ~ dataset$X1, data = dataset)
+  print(summary(lr.mod))
+  
+  plot(dataset$Y, dataset$X1,col = "blue",main = "X1 - Y1 Regression", abline(lm(dataset$X1 ~ dataset$Y)),xlab = "X1",ylab = "Y1")
+  
+  res <- resid(lr.mod)
+  fit <- fitted(lr.mod)
+  qqnorm(res)
+  qqline(res, col = 'red')
+  hist(res)
+  
+  res.mean <- mean(res)
+  res.sd <- sd(res)
+  fit.mean <- mean(fit)
+  fit.sd <- sd(fit)
+  print(res.sd)
+  print(fit.sd)
+  res.dnorm <- dnorm(res, res.mean, res.sd)
+  #curve(res.dnorm, col = 2, add = TRUE)
+  hist(res)
+  chi.fun(res, fit)
+  plot(fit, res, col = 'red', main = "Residual vs. Fitted Value graph", abline(lm(res ~ fit)))
+}
+
+linear.fun(prob)
+
+# Part 2.7
+# Poly Regression - High Order Regression
+polyReg.fun <- function(dataset) {
+  X1S <- dataset$X1 * dataset$X1
+  highOrdReg.mod <- lm(dataset$Y ~ dataset$X1 + X1S,data = dataset)
+  
+  plot(highOrdReg.mod)
+  
+  #plot(dataset$Y~dataset$X1)
+  #lines(sort(dataset$X1), fitted(highOrdReg.mod)[order(dataset$X1)], col='red', type='b') 
+  
+  print(summary(highOrdReg.mod))
+  res <- resid(highOrdReg.mod)
+  fit <- fitted(highOrdReg.mod)
+  
+  res.mean <- mean(res)
+  res.sd <- sd(res)
+  fit.mean <- mean(fit)
+  fit.sd <- sd(fit)
+  print(res.sd)
+  print(fit.sd)
+  
+  res.dnorm <- dnorm(res, res.mean, res.sd)
+  fit.dnorm <- dnorm(fit, fit.mean, fit.sd)
+  
+  
+  qqnorm(res)
+  qqline(res, col = 'red')
+  hist(res)
+  chi.fun(res, fit)
+  plot(res, col = 'red', main = "Residual vs. Fitted Value graph (Poly Regression)", abline(lm(res ~ fit)))
+}
+
+polyReg.fun(prob)
+
+# PART 3
+# MultiVariate Function
+multivariate.fun <- function(dataset) {
+  multivariate.mod <- lm(dataset$Y ~ dataset$X1+dataset$X2+dataset$X3+dataset$X4+dataset$X5, data = dataset)
+  res <- resid(multivariate.mod)
+  fit <- fitted(multivariate.mod)
+  print(summary(multivariate.mod))
+  res.sd <- sd(res)
+  fit.sd <- sd(fit)
+  print(res.sd)
+  print(fit.sd)
+  qqnorm(res)
+  qqline(res, col = 'red')
+  chi.fun(res, fit)
+  hist(res, main="Histogram of Residual Analysis")
+  plot(multivariate.mod)
+}
+
+multivariate.fun(prob)
+
+corr.res <- function(res, fit){
+  d <- data.frame(Residual = res, Fitted = fit)
+  correlationD <- cor(d)
+  print(correlationD)
+  corrplot(correlationD, method = "circle")
+}
+
+# Part 3.2
+# MultiVariate Function
+multivariate_new.fun <- function(dataset) {
+  multivariate.mod <- lm(dataset$Y ~ dataset$X1+dataset$X4+dataset$X5, data = dataset)
+  res <- resid(multivariate.mod)
+  fit <- fitted(multivariate.mod)
+  print(summary(multivariate.mod))
+  res.sd <- sd(res)
+  fit.sd <- sd(fit)
+  
+  
+  corr.res(res, fit)
+  
+  print(res.sd)
+  print(fit.sd)
+  qqnorm(res)
+  qqline(res, col = 'red')
+  hist(res, main="Histogram of Residual Analysis")
+  plot(multivariate.mod)
+}
+
+multivariate_new.fun(prob)
+
+
